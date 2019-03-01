@@ -4,4 +4,10 @@
   service:
     name: php7.2-fpm
     state: restarted
+
+- name: restart php fpm 7.2
+  become: yes
+  service:
+    name: php7.2-fpm
+    state: restarted
 ...

@@ -122,4 +122,6 @@
     regexp: ';?request_terminate_timeout=\d'
     line: 'request_terminate_timeout=300'
   notify: restart php fpm 7.2
+
+- include_tasks: redis.yml
 ...

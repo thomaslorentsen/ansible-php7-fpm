@@ -1,0 +1,40 @@
+---
+- name: install php redis module
+  become: yes
+  package:
+    name: php7.2-redis
+    state: present
+  notify: restart php fpm 7.2
+
+- name: set redis to be save handler in php
+  become: yes
+  lineinfile:
+    dest: /etc/php/7.2/fpm/php.ini
+    regexp: '^session.save_handler ?='
+    line: 'session.save_handler=redis'
+  notify: restart php fpm 7.2
+
+- name: set redis to be save handler in php
+  become: yes
+  lineinfile:
+    dest: /etc/php/7.2/fpm/php.ini
+    regexp: '^session.save_path ?='
+    line: 'session.save_path="tcp://{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}:6379"'
+  notify: restart php fpm 7.2
+
+- name: set session cookie lifetime
+  become: yes
+  lineinfile:
+    dest: /etc/php/7.2/fpm/php.ini
+    regexp: '^session.cookie_lifetime ?='
+    line: 'session.cookie_lifetime = 0'
+  notify: restart php fpm 7.2
+
+- name: set session garbage collection lifetime
+  become: yes
+  lineinfile:
+    dest: /etc/php/7.2/fpm/php.ini
+    regexp: '^session.gc_maxlifetime ?='
+    line: 'session.gc_maxlifetime = 86400'
+  notify: restart php fpm 7.2
+...
