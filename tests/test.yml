@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-php7-fpm
+    - {role: ansible-php7-fpm, php_validate_certs: no}

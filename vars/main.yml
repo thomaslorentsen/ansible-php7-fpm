@@ -1,4 +1,5 @@
 ---
 redis_host_address: "{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
 php_version: "7.2"
+php_validate_certs: yes
 ...
