@@ -2,7 +2,7 @@
 - name: install packages required by apt
   become: yes
   package:
-    name: apt-transport-https, ca-certificates
+    name: apt-transport-https
     state: present
 
 - name: add apt key for php7
