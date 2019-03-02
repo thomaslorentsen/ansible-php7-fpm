@@ -2,39 +2,39 @@
 - name: install php redis module
   become: yes
   package:
-    name: php7.2-redis
+    name: php{{ php_version }}-redis
     state: present
-  notify: restart php fpm 7.2
+  notify: restart php fpm {{ php_version }}
 
 - name: set redis to be save handler in php
   become: yes
   lineinfile:
-    dest: /etc/php/7.2/fpm/php.ini
+    dest: /etc/php/{{ php_version }}/fpm/php.ini
     regexp: '^session.save_handler ?='
     line: 'session.save_handler=redis'
-  notify: restart php fpm 7.2
+  notify: restart php fpm {{ php_version }}
 
 - name: set redis to be save handler in php
   become: yes
   lineinfile:
-    dest: /etc/php/7.2/fpm/php.ini
+    dest: /etc/php/{{ php_version }}/fpm/php.ini
     regexp: '^session.save_path ?='
     line: 'session.save_path="tcp://{{ redis_host_address }}:6379"'
-  notify: restart php fpm 7.2
+  notify: restart php fpm {{ php_version }}
 
 - name: set session cookie lifetime
   become: yes
   lineinfile:
-    dest: /etc/php/7.2/fpm/php.ini
+    dest: /etc/php/{{ php_version }}/fpm/php.ini
     regexp: '^session.cookie_lifetime ?='
     line: 'session.cookie_lifetime = 0'
-  notify: restart php fpm 7.2
+  notify: restart php fpm {{ php_version }}
 
 - name: set session garbage collection lifetime
   become: yes
   lineinfile:
-    dest: /etc/php/7.2/fpm/php.ini
+    dest: /etc/php/{{ php_version }}/fpm/php.ini
     regexp: '^session.gc_maxlifetime ?='
     line: 'session.gc_maxlifetime = 86400'
-  notify: restart php fpm 7.2
+  notify: restart php fpm {{ php_version }}
 ...
