@@ -1,4 +1,6 @@
-Role Name
+[![Build Status](https://travis-ci.org/thomaslorentsen/ansible-php7-fpm.svg?branch=master)](https://travis-ci.org/thomaslorentsen/ansible-php7-fpm)
+
+PHP7 FPM
 =========
 
 A brief description of the role goes here.
@@ -25,7 +27,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: thomaslorentsen.php7-fpm }
 
 License
 -------
