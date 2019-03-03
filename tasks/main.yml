@@ -76,7 +76,7 @@
   lineinfile:
     dest: /etc/php/{{ php_version }}/fpm/php.ini
     regexp: 'session.name ?='
-    line: 'session.name = rp'
+    line: 'session.name = {{ php_cookie_name }}'
   notify: restart php fpm {{ php_version }}
 
 - name: set secure session cookies
@@ -84,7 +84,7 @@
   lineinfile:
     dest: /etc/php/{{ php_version }}/fpm/php.ini
     regexp: 'session.cookie_secure ?='
-    line: 'session.cookie_secure = 1'
+    line: 'session.cookie_secure = {{ php_cookie_secure }}'
   notify: restart php fpm {{ php_version }}
 
 - name: set http only session cookies
